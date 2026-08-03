@@ -46,9 +46,3 @@ class Predictor:
     def predict_tl(self, path):
         return self._predict(self.tl, path)
 
-    def predict_both(self, path):
-        return {
-            "CNN": self._predict(self.cnn, path),
-            "TL": self._predict(self.tl, path),
-        }
-    

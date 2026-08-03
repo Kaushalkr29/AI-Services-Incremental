@@ -81,7 +81,7 @@ agent = create_agent(
         vision_result_lookup,
     ],
     system_prompt="""
-You are MarketPulse Assistant.
+You are AI Incremental Assistant.
 
 Use:
 - forecast_lookup for sales forecasting
