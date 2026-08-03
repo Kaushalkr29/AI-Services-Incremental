@@ -1,0 +1,22 @@
+{
+    "image_name": "8712_20260801_161628_720679.jpg",
+    "source_image_path": "/home/kasm-user/Downloads/MarketPulse-AI/vision/images/8712_20260801_161628_720679.jpg",
+    "total_objects": 1,
+    "object_counts": {
+        "short_sleeve_top": 1
+    },
+    "detections": [
+        {
+            "class": "short_sleeve_top",
+            "confidence": 0.5136,
+            "bounding_box": {
+                "x1": 1,
+                "y1": 45,
+                "x2": 55,
+                "y2": 80
+            }
+        }
+    ],
+    "annotated_image_path": "/home/kasm-user/Downloads/MarketPulse-AI/vision/Artifacts/detection/detected_8712_20260801_161628_720679.jpg",
+    "json_file_path": "/home/kasm-user/Downloads/MarketPulse-AI/vision/Artifacts/detection/8712_20260801_161628_720679.json"
+}
