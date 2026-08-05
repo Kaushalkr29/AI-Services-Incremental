@@ -3,7 +3,6 @@ import joblib
 from ml_tech.src.data_cleaning import DataCleaning
 from ml_tech.src.feature_engineering import FeatureEngineering
 from ml_tech.src.ml_model import MLModel
-from ml_tech.src.ann_model import ANNModel
 
 
 def train_and_save_models():
@@ -111,25 +110,6 @@ def train_and_save_models():
     joblib.dump(
         svm_metrics,
         "ml_tech/reports/svm_metrics.pkl"
-    )
-
-    # ==========================
-    # ANN
-    # ==========================
-
-    ann = ANNModel()
-
-    ann.build_model(
-        X_train.shape[1]
-    )
-
-    ann.train_model(
-        X_train,
-        y_train
-    )
-
-    ann.save_model(
-        "ml_tech/reports/ann_model.keras"
     )
 
     print("All models and metrics saved successfully!")

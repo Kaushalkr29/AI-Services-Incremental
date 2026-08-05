@@ -152,33 +152,3 @@ def svm(user_input):
         prediction,
         metrics
     )
-
-
-def ann(user_input):
-
-    model = load_model(
-        os.path.join(
-            BASE_DIR,
-            "reports",
-            "ann_model.keras"
-        )
-    )
-
-    prediction = model.predict(
-        preprocess_input(user_input),
-        verbose=0
-    )[0][0]
-
-    pred = 1 if prediction > 0.5 else 0
-
-    metrics = {
-        "accuracy": "N/A",
-        "precision": "N/A",
-        "recall": "N/A",
-        "f1_score": "N/A"
-    }
-
-    return prepare_response(
-        pred,
-        metrics
-    )
