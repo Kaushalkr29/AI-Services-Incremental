@@ -8,7 +8,6 @@ from pydantic import BaseModel
 from dotenv import load_dotenv
 from LANGRAPH.scripts import run_chatbot
 from LangChain.agent.script import run_tool_agent
-# from deep_learning.script import predict_cnn,predict_tl
 
 # ML
 from vision.src.audio_generation import AudioGenerator
@@ -607,55 +606,3 @@ DETECTION_OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 @app.get("/object", response_class=HTMLResponse)
 def detect_page(request: Request):
     return templates.TemplateResponse(request, "object.html")
-
-@app.post("/detect-object")
-async def detect_object_endpoint(image: UploadFile = File(...)):
-    from vision.src.detector import FashionDetector
-
-    # 1. check the file is a valid image
-    if image.content_type not in ALLOWED_TYPES:
-        return JSONResponse(
-            status_code=400,
-            content={
-                "status": "error",
-                "message": "Please upload a valid image (jpg, png, webp)",
-            },
-        )
-
-    # 2. save the file into uploads folder
-    file_path = os.path.join(UPLOAD_DIR, image.filename)
-    with open(file_path, "wb") as f:
-        content = await image.read()
-        f.write(content)
-
-    # 3. run the detector
-    try:
-        detector = FashionDetector(PROJECT_ROOT / "mainproj" / "model" / "best.pt")
-
-        annotated_image, summary, output_image_path, json_path = detector.detect_objects(
-            file_path,
-            save_dir=DETECTION_OUTPUT_DIR,
-            images_dir=DETECTION_OUTPUT_DIR,
-        )
-    except Exception as e:
-        return JSONResponse(
-            status_code=500,
-            content={
-                "status": "error",
-                "message": str(e),
-            },
-        )
-
-    # 4. build url so the browser can load the annotated image
-    filename = os.path.basename(output_image_path)
-    image_url = "/static/detection/" + filename
-
-    # 5. return result in the shape the HTML expects
-    return {
-        "status": "success",
-        "method": "object-detection",
-        "image_name": summary["image_name"],
-        "total_objects": summary["total_objects"],
-        "object_counts": summary["object_counts"],
-        "image_url": image_url,
-    }
