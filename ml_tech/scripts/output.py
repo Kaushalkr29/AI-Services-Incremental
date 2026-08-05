@@ -1,8 +1,6 @@
 import os
 import joblib
 import pandas as pd
-
-from tensorflow.keras.models import load_model
 from ml_tech.src.feature_engineering import FeatureEngineering
 
 
